@@ -18,6 +18,10 @@ public class RestClient {
         return given().spec(SpecificationFactory.log_Response_To_Allure()).when().get(endpoint);
     }
 
+    public Response getWithQueryParam(String endpoint, String key, Object value) {
+        return given().queryParam(key,value).spec(SpecificationFactory.log_Response_To_Allure()).when().get(endpoint);
+    }
+
     public Response post(String endpoint, Object body) {
         return given().contentType(ContentType.JSON).spec(SpecificationFactory.log_Response_To_Allure())
                 .when().body(body).post(endpoint);
