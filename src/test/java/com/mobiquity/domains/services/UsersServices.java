@@ -3,8 +3,7 @@ package com.mobiquity.domains.services;
 import com.mobiquity.core.client.RestClient;
 import com.mobiquity.domains.entity.User;
 import com.mobiquity.domains.response.UsersResponse;
-import org.apache.http.HttpStatus;
-import sun.net.httpserver.HttpServerImpl;
+
 
 public class UsersServices extends RestClient {
 
