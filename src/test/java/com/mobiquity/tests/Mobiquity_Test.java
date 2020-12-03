@@ -1,5 +1,6 @@
 package com.mobiquity.tests;
 
+import com.mobiquity.domains.clients.CommentsClient;
 import com.mobiquity.domains.clients.PostClient;
 import com.mobiquity.domains.clients.UsersClient;
 import io.qameta.allure.Description;
@@ -16,11 +17,13 @@ public class Mobiquity_Test {
 
     private final UsersClient usersClient;
     private final PostClient postClient;
+    private final CommentsClient commentsClient;
 
 
     public Mobiquity_Test() {
         usersClient = new UsersClient();
         postClient = new PostClient();
+        commentsClient = new CommentsClient();
     }
 
     @Test
@@ -45,5 +48,15 @@ public class Mobiquity_Test {
     @Description("GET Post IDs of Username Delphine")
     public void getPostIDs() {
         assertTrue(postClient.getPostIdsOfAUser(usersClient.getUserWithUsername("Delphine").id).size() > 0);
+    }
+
+    @Test
+    @Tag("GET")
+    @DisplayName("GET Invalid Email Number")
+    @Description("GET Emails from Delphine's Posts and check their format")
+    public void checkEmailFormat() {
+        assertEquals(0, commentsClient.getNumberOfInvalidEmailsFromPostComments(
+                postClient.getPostIdsOfAUser(
+                        usersClient.getUserWithUsername("Delphine").id)));
     }
 }
