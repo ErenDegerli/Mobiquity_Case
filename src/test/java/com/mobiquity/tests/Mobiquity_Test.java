@@ -3,6 +3,7 @@ package com.mobiquity.tests;
 import com.mobiquity.domains.clients.CommentsClient;
 import com.mobiquity.domains.clients.PostClient;
 import com.mobiquity.domains.clients.UsersClient;
+import com.mobiquity.domains.response.UsersResponse;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,12 @@ public class Mobiquity_Test {
     @DisplayName("GET User with Username")
     @Description("GET User with Username = Delphine and see its existence")
     public void getUser() {
-        assertNotNull(usersClient.getUserWithUsername("Delphine"));
+        UsersResponse response = usersClient.getUserWithUsername("Delphine");
+        assertAll(
+                () -> assertNotNull(response),
+                () -> assertEquals("Glenna Reichert",response.name),
+                () -> assertEquals("Chaim_McDermott@dana.io", response.email)
+        );
     }
 
     @Test
