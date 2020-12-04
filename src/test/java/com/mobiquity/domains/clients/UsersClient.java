@@ -22,8 +22,16 @@ public class UsersClient {
         return usersServices.getAllUsers()[length - 1].id;
     }
 
+    public boolean getUserWithId(int userId) {
+        return usersServices.getUserWithID(userId);
+    }
+
     public int postUser() {
         User user = new UserBuilder().build();
         return usersServices.postUser(user);
+    }
+
+    public boolean deleteUser(int userId) {
+        return usersServices.deleteUser(userId);
     }
 }
