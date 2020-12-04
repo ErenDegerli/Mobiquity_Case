@@ -1,10 +1,10 @@
 package com.mobiquity.domains.services;
 
 import com.mobiquity.core.client.RestClient;
-import com.mobiquity.utils.EmailFormatChecker;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import static com.mobiquity.utils.EmailFormatChecker.getInvalidMailNumber;
 
 public class CommentsServices extends RestClient {
 
@@ -23,6 +23,6 @@ public class CommentsServices extends RestClient {
     public int getInvalidMailCount(ArrayList<Integer> postIds){
         Set<String> distinctMails = new HashSet<>();
         getEmailsFromComments(postIds).forEach(distinctMails::addAll);
-        return EmailFormatChecker.getInvalidMailNumber(distinctMails);
+        return getInvalidMailNumber(distinctMails);
     }
 }

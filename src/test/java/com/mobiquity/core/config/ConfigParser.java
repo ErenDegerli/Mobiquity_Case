@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ConfigParser {
 
-    private static final String CONFIG_FILE_NAME = "./config.yml";
+    private static final String CONFIG_FILE_NAME = "./configuration.yml";
 
     public static String getValue(String key) {
         Yaml yaml = new Yaml();
