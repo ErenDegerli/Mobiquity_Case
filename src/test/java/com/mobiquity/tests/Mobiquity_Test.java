@@ -18,12 +18,14 @@ public class Mobiquity_Test {
     private final UsersClient usersClient;
     private final PostClient postClient;
     private final CommentsClient commentsClient;
+    private final String name;
 
 
     public Mobiquity_Test() {
         usersClient = new UsersClient();
         postClient = new PostClient();
         commentsClient = new CommentsClient();
+        name = "Delphine";
     }
 
     @Test
@@ -31,7 +33,7 @@ public class Mobiquity_Test {
     @DisplayName("GET User with Username")
     @Description("GET User with Username = Delphine and see its existence")
     public void getUser() {
-        UsersResponse response = usersClient.getUserWithUsername("Delphine");
+        UsersResponse response = usersClient.getUserWithUsername(name);
         assertAll(
                 () -> assertNotNull(response),
                 () -> assertEquals("Glenna Reichert",response.name),
@@ -49,21 +51,11 @@ public class Mobiquity_Test {
     }
 
     @Test
-    @Order(2)
-    @Tag("GET")
-    @DisplayName("GET Recently Posted User")
-    @Description("GET a recently created user to see that it really exists")
-    public void getCreatedUser() {
-        String username = "Eren";
-        assertEquals(usersClient.getUserWithUsername(username).username, username);
-    }
-
-    @Test
     @Tag("GET")
     @DisplayName("GET Post IDs of a User")
     @Description("GET Post IDs of Username Delphine")
     public void getPostIDs() {
-        assertTrue(postClient.getPostIdsOfAUser(usersClient.getUserWithUsername("Delphine").id).size() > 0);
+        assertTrue(postClient.getPostIdsOfAUser(usersClient.getUserWithUsername(name).id).size() > 0);
     }
 
     @Test
@@ -73,7 +65,7 @@ public class Mobiquity_Test {
     public void checkEmailFormat() {
         assertEquals(0, commentsClient.getNumberOfInvalidEmailsFromPostComments(
                 postClient.getPostIdsOfAUser(
-                        usersClient.getUserWithUsername("Delphine").id)));
+                        usersClient.getUserWithUsername(name).id)));
     }
 
     @Test

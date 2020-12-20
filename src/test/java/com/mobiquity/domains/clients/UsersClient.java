@@ -4,34 +4,42 @@ import com.mobiquity.domains.builders.UserBuilder;
 import com.mobiquity.domains.entity.User;
 import com.mobiquity.domains.response.UsersResponse;
 import com.mobiquity.domains.services.UsersServices;
+import org.apache.log4j.Logger;
+import sun.rmi.runtime.Log;
 
 public class UsersClient {
 
     private final UsersServices usersServices;
+    private final Logger logger = Logger.getLogger(UsersClient.class);
 
     public UsersClient() {
         usersServices = new UsersServices();
     }
 
     public UsersResponse getUserWithUsername(String username) {
+        logger.info("Getting a user with username = " + username);
         return usersServices.getUserWithUsername(username)[0];
     }
 
     public int getLatestUserId() {
         int length = usersServices.getAllUsers().length;
+        logger.info("Getting latest user ID = " + length);
         return usersServices.getAllUsers()[length - 1].id;
     }
 
     public boolean getUserWithId(int userId) {
+        logger.info("Getting a user with id = " + userId);
         return usersServices.getUserWithID(userId);
     }
 
     public int postUser() {
         User user = new UserBuilder().build();
+        logger.info("Posting a user with email = " + user.email);
         return usersServices.postUser(user);
     }
 
     public boolean deleteUser(int userId) {
+        logger.info("Deleting a user with user ID = " + userId);
         return usersServices.deleteUser(userId);
     }
 }
