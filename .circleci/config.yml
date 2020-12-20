@@ -21,17 +21,40 @@ jobs:
 
       - run: mvn test
 
+commands:
+  build-and-run:
+    steps:
+      - run:
+          name: install Java
+          command: |
+            sudo apt update
+            sudo apt install default-jre
+      - allure/install
+      - run:
+          name: run tests
+          command: |
+            bundle exec rspec \
+            --format progress \
+            --format AllureRspecFormatter
+          environment:
+            HEADLESS_MODE: true
+            LANG: ja_JP.UTF-8
+      - store_test_results:
+          path: reports
+      - store_artifacts:
+          path: tmp/screenshots
       - run:
           name: clean Allure report generation path
-          command: rm -rf target/allure-results
-
+          command: rm -rf reports/allure-report
       - run:
           name: Allure report generation
           command: |
-            scoop install allure
-            allure serve target/allure-results/
+            allure generate \
+            --report-dir reports/allure-report \
+            --clean \
+            reports/allure-results
           when: always
       - store_artifacts:
-          path: target/allure-results
+          path: reports/allure-report
           destination: Report/Allure
           when: always
