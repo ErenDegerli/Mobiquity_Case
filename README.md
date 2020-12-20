@@ -1,7 +1,7 @@
 #Mobiquity Test Case
 REST_Assured API Test Framework 
 
-(Java, REST-Assured, JUnit5, Allure Reports(with Request and Response Attachments), CircleCI)
+(Java, REST-Assured, JUnit5, Log4j, Allure Reports(with Request and Response Attachments), CircleCI)
 
 #To Run
 mvn test
@@ -11,4 +11,4 @@ mvn test
 
 When the test execution finished, enter the command below inside the project in order to see Allure Results with Request-Response Attachments:
 
-- allure serve target/surefire-reports/
+- allure serve target/allure-reports/
