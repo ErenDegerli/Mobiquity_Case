@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Allure report generation
           command: |
-            sudo npm install -g allure-commandline
+            scoop install allure
             allure serve target/allure-results/
           when: always
       - store_artifacts:
