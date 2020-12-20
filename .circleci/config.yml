@@ -2,6 +2,7 @@ version: 2
 commands:
   build-and-run:
     steps:
+      - (省略)
       - run:
           name: install Java
           command: |
