@@ -28,10 +28,7 @@ jobs:
       - run:
           name: Allure report generation
           command: |
-            allure serve \
-            --report-dir target/allure-results \
-            --clean \
-            target/allure-results
+            allure serve target/allure-results/
           when: always
       - store_artifacts:
           path: target/allure-results
