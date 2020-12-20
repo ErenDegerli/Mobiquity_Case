@@ -24,8 +24,8 @@ jobs:
       - run:
           name: Save test results
           command: |
-            sudo npm install -g allure-commandline
-            allure generate --clean
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/allure-results/.*" -exec cp {} ~/test-results/junit/ \;
           when: always
       - store_test_results:
           path: ~/test-results/junit
