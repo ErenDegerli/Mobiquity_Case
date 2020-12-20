@@ -26,7 +26,7 @@ public class UsersClient {
         return usersServices.getAllUsers()[length - 1].getId();
     }
 
-    public boolean getUserWithId(int userId) {
+    public UsersResponse[] getUserWithId(int userId) {
         logger.info("Getting a user with id = " + userId);
         return usersServices.getUserWithID(userId);
     }
@@ -37,8 +37,8 @@ public class UsersClient {
         return usersServices.postUser(user);
     }
 
-    public boolean deleteUser(int userId) {
-        logger.info("Deleting a user with user ID = " + userId);
-        return usersServices.deleteUser(userId);
+    public int deleteUserAndGetStatusCode(int userId) {
+        logger.info("Delete a user with user ID = " + userId + " and see status code 200");
+        return usersServices.deleteUser(userId).getStatusCode();
     }
 }

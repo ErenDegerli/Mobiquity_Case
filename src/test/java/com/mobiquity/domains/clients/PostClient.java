@@ -4,6 +4,7 @@ import com.mobiquity.domains.services.PostServices;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PostClient {
 
@@ -15,7 +16,8 @@ public class PostClient {
     }
 
     public ArrayList<Integer> getPostIdsOfAUser(int userId) {
-        logger.info("Getting of a user's all Posts whose ID is = " + userId);
-        return postServices.getAllPostsIdsOfAUser(userId);
+        ArrayList<Integer> posts = postServices.getAllPostsIdsOfAUser(userId);
+        logger.info("Getting of a user's (whose ID is " + userId + ") all Posts and see the number of Posts is (" + posts.size() + ") greater than 0");
+        return posts;
     }
 }
