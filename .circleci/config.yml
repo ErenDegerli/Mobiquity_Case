@@ -1,39 +1,36 @@
 version: 2
-commands:
-  build-and-run:
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
     steps:
-      - (省略)
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      - run: mvn test
+
+
       - run:
-          name: install Java
+          name: Save test results
           command: |
-            sudo apt update
-            sudo apt install default-jre
-      - allure/install
-      - run:
-          name: run tests
-          command: |
-            bundle exec rspec \
-            --format progress \
-            --format AllureRspecFormatter
-          environment:
-            HEADLESS_MODE: true
-            LANG: ja_JP.UTF-8
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
       - store_test_results:
-          path: reports
+          path: ~/test-results/junit
       - store_artifacts:
-          path: tmp/screenshots
-      - run:
-          name: clean Allure report generation path
-          command: rm -rf reports/allure-report
-      - run:
-          name: Allure report generation
-          command: |
-            allure generate \
-            --report-dir reports/allure-report \
-            --clean \
-            reports/allure-results
-          when: always
+          path: ~/test-results/junit
       - store_artifacts:
-          path: reports/allure-report
-          destination: Report/Allure
-          when: always
+          path:  target/my-reports
