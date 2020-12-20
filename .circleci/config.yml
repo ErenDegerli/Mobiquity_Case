@@ -34,7 +34,7 @@ jobs:
       - store_artifacts:
           path:  target/my-reports
 
-      -run:
+      - run:
         name: generate allure report
           command: |
             sudo npm install -g allure-commandline
