@@ -21,13 +21,15 @@ jobs:
 
       - run: mvn test
 
-
-
       - run:
-        name: generate allure report
+          name: Save test results
           command: |
             sudo npm install -g allure-commandline
             allure generate --clean
           when: always
+      - store_test_results:
+          path: ~/test-results/junit
       - store_artifacts:
-          path: /home/circleci/project/allure-report
+          path: ~/test-results/junit
+      - store_artifacts:
+          path:  target/my-reports
