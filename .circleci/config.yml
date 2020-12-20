@@ -33,3 +33,12 @@ jobs:
           path: ~/test-results/junit
       - store_artifacts:
           path:  target/my-reports
+
+      run:
+        name: generate allure report
+          command: |
+            sudo npm install -g allure-commandline
+            allure generate --clean
+          when: always
+          - store_artifacts:
+              path: /home/circleci/project/allure-report
