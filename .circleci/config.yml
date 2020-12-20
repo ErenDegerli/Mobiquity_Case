@@ -21,7 +21,7 @@ jobs:
 
       - run: mvn test
 
-      run:
+      - run:
         name: clean Allure report generation path
         command: rm -rf target/allure-results
           - run:
