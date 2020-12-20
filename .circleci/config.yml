@@ -22,14 +22,14 @@ jobs:
       - run: mvn test
 
       - run:
-          name: Save test results
+          name: Allure report generation
           command: |
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/target/allure-results/.*" -exec cp {} ~/test-results/junit/ \;
+            allure generate \
+            --report-dir target/allure-results \
+            --clean \
+            target/allure-results
           when: always
-      - store_test_results:
-          path: ~/test-results/junit
       - store_artifacts:
-          path: ~/test-results/junit
-      - store_artifacts:
-          path:  target/my-reports
+          path: target/allure-results
+          destination: Report/Allure
+          when: always
