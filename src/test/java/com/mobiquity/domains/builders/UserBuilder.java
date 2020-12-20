@@ -22,11 +22,11 @@ public class UserBuilder {
 
     public User build() {
         return new User() {{
-            this.name = _name;
-            this.username = _username;
-            this.email = _email;
-            this.phone = _phone;
-            this.website = _website;
+            setName(_name);
+            setUsername(_username);
+            setEmail(_email);
+            setPhone(_phone);
+            setWebsite(_website);
         }};
     }
 }

@@ -15,7 +15,7 @@ public class PostClient {
     }
 
     public ArrayList<Integer> getPostIdsOfAUser(int userId) {
-        logger.info("Getting of a user whose ID is = " + userId);
+        logger.info("Getting of a user's all Posts whose ID is = " + userId);
         return postServices.getAllPostsIdsOfAUser(userId);
     }
 }

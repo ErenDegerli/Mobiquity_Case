@@ -3,7 +3,7 @@ package com.mobiquity.tests;
 import com.mobiquity.domains.clients.CommentsClient;
 import com.mobiquity.domains.clients.PostClient;
 import com.mobiquity.domains.clients.UsersClient;
-import com.mobiquity.domains.response.UsersResponse;
+import com.mobiquity.domains.response.UsersResponse.UsersResponse;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,8 +36,8 @@ public class Mobiquity_Test {
         UsersResponse response = usersClient.getUserWithUsername(name);
         assertAll(
                 () -> assertNotNull(response),
-                () -> assertEquals("Glenna Reichert",response.name),
-                () -> assertEquals("Chaim_McDermott@dana.io", response.email)
+                () -> assertEquals("Glenna Reichert",response.getName()),
+                () -> assertEquals("Chaim_McDermott@dana.io", response.getEmail())
         );
     }
 
@@ -55,7 +55,7 @@ public class Mobiquity_Test {
     @DisplayName("GET Post IDs of a User")
     @Description("GET Post IDs of Username Delphine")
     public void getPostIDs() {
-        assertTrue(postClient.getPostIdsOfAUser(usersClient.getUserWithUsername(name).id).size() > 0);
+        assertTrue(postClient.getPostIdsOfAUser(usersClient.getUserWithUsername(name).getId()).size() > 0);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class Mobiquity_Test {
     public void checkEmailFormat() {
         assertEquals(0, commentsClient.getNumberOfInvalidEmailsFromPostComments(
                 postClient.getPostIdsOfAUser(
-                        usersClient.getUserWithUsername(name).id)));
+                        usersClient.getUserWithUsername(name).getId())));
     }
 
     @Test

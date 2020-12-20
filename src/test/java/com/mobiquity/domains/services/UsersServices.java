@@ -2,7 +2,7 @@ package com.mobiquity.domains.services;
 
 import com.mobiquity.core.client.RestClient;
 import com.mobiquity.domains.entity.User;
-import com.mobiquity.domains.response.UsersResponse;
+import com.mobiquity.domains.response.UsersResponse.UsersResponse;
 import org.apache.http.HttpStatus;
 
 public class UsersServices extends RestClient {

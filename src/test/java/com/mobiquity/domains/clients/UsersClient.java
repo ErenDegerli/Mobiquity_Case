@@ -2,10 +2,9 @@ package com.mobiquity.domains.clients;
 
 import com.mobiquity.domains.builders.UserBuilder;
 import com.mobiquity.domains.entity.User;
-import com.mobiquity.domains.response.UsersResponse;
+import com.mobiquity.domains.response.UsersResponse.UsersResponse;
 import com.mobiquity.domains.services.UsersServices;
 import org.apache.log4j.Logger;
-import sun.rmi.runtime.Log;
 
 public class UsersClient {
 
@@ -24,7 +23,7 @@ public class UsersClient {
     public int getLatestUserId() {
         int length = usersServices.getAllUsers().length;
         logger.info("Getting latest user ID = " + length);
-        return usersServices.getAllUsers()[length - 1].id;
+        return usersServices.getAllUsers()[length - 1].getId();
     }
 
     public boolean getUserWithId(int userId) {
@@ -34,7 +33,7 @@ public class UsersClient {
 
     public int postUser() {
         User user = new UserBuilder().build();
-        logger.info("Posting a user with email = " + user.email);
+        logger.info("Posting a user with email = " + user.getEmail());
         return usersServices.postUser(user);
     }
 
