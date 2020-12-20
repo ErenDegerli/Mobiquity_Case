@@ -21,15 +21,18 @@ jobs:
 
       - run: mvn test
 
-      - run:
-          name: Allure report generation
-          command: |
-            allure generate \
-            --report-dir target/allure-results \
-            --clean \
-            target/allure-results
-          when: always
-      - store_artifacts:
-          path: target/allure-results
-          destination: Report/Allure
-          when: always
+      run:
+        name: clean Allure report generation path
+        command: rm -rf target/allure-results
+          - run:
+              name: Allure report generation
+              command: |
+                allure serve \
+                --report-dir target/allure-results \
+                --clean \
+                target/allure-results
+              when: always
+          - store_artifacts:
+              path: target/allure-results
+              destination: Report/Allure
+              when: always
