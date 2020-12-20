@@ -21,18 +21,7 @@ jobs:
 
       - run: mvn test
 
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/test-results/junit/
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
-          when: always
-      - store_test_results:
-          path: ~/test-results/junit
-      - store_artifacts:
-          path: ~/test-results/junit
-      - store_artifacts:
-          path:  target/my-reports
+
 
       - run:
         name: generate allure report
@@ -40,5 +29,5 @@ jobs:
             sudo npm install -g allure-commandline
             allure generate --clean
           when: always
-          - store_artifacts:
-              path: /home/circleci/project/allure-report
+      - store_artifacts:
+          path: /home/circleci/project/allure-report
